@@ -1,0 +1,11 @@
+CVS/
+sample/
+temp/
+event-test.c
+*.o
+httpd.c
+httpd.h
+libevent.a
+test
+test-miniserver
+test-miniseverlib

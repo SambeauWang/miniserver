@@ -1,0 +1,45 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:529: checking for gcc
+configure:642: checking whether the C compiler (gcc  ) works
+configure:658: gcc -o conftest    conftest.c  1>&5
+configure:684: checking whether the C compiler (gcc  ) is a cross-compiler
+configure:689: checking whether we are using GNU C
+configure:698: gcc -E conftest.c
+configure:717: checking whether gcc accepts -g
+configure:751: checking for ranlib
+configure:809: checking for a BSD compatible install
+configure:864: checking how to run the C preprocessor
+configure:885: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:944: checking for ANSI C header files
+configure:957: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1024: gcc -o conftest -g -O2   conftest.c  1>&5
+configure: In function 'main':
+configure:1019:67: warning: incompatible implicit declaration of built-in function 'exit'
+ if (XOR (islower (i), ISLOWER (i)) || toupper (i) != TOUPPER (i)) exit(2);
+                                                                   ^
+configure:1051: checking for unistd.h
+configure:1061: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1051: checking for sys/time.h
+configure:1061: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1051: checking for sys/queue.h
+configure:1061: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1051: checking for sys/event.h
+configure:1061: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1057:23: fatal error: sys/event.h: No such file or directory
+ #include <$ac_hdr>
+                       ^
+compilation terminated.
+configure: failed program was:
+#line 1056 "configure"
+#include "confdefs.h"
+#include <sys/event.h>
+configure:1089: checking for TAILQ_FOREACH in sys/queue.h
+configure:1118: checking for timeradd in sys/time.h
+configure:1146: checking whether time.h and sys/time.h may both be included
+configure:1160: gcc -c -g -O2  conftest.c 1>&5
+configure:1184: checking for gettimeofday
+configure:1212: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1241: checking for select
+configure:1269: gcc -o conftest -g -O2   conftest.c  1>&5

@@ -1,0 +1,67 @@
+dnl configure.in for libevent
+dnl Dug Song <dugsong@monkey.org>
+
+AC_INIT(event.c)
+
+dnl Checks for programs.
+AC_PROG_CC
+AC_PROG_RANLIB
+AC_PROG_INSTALL
+
+dnl Checks for libraries.
+
+dnl Checks for header files.
+AC_HEADER_STDC
+AC_CHECK_HEADERS(unistd.h sys/time.h sys/queue.h sys/event.h)
+if test "x$ac_cv_header_sys_queue_h" = "xyes"; then
+	AC_MSG_CHECKING(for TAILQ_FOREACH in sys/queue.h)
+	AC_EGREP_CPP(yes,
+[
+#include <sys/queue.h>
+#ifdef TAILQ_FOREACH
+ yes
+#endif
+], AC_MSG_RESULT(yes),
+		       [ AC_MSG_RESULT(no, using our own)
+			 CFLAGS="$CFLAGS -Imissing/queue" ]
+	)
+else
+	CFLAGS="$CFLAGS -Imissing/queue"
+fi
+
+if test "x$ac_cv_header_sys_time_h" = "xyes"; then
+	AC_MSG_CHECKING(for timeradd in sys/time.h)
+	AC_EGREP_CPP(yes,
+[
+#include <sys/time.h>
+#ifdef timeradd
+ yes
+#endif
+], AC_MSG_RESULT(yes),
+		       [ AC_MSG_RESULT(no, using our own)
+			 CFLAGS="$CFLAGS -Imissing/time" ]
+	)
+else
+	CFLAGS="$CFLAGS -Imissing/time"
+fi
+
+dnl Checks for typedefs, structures, and compiler characteristics.
+AC_HEADER_TIME
+
+dnl Checks for library functions.
+AC_CHECK_FUNCS(gettimeofday)
+
+AC_SUBST(EVSRCS)
+AC_CHECK_FUNCS(select, [haveselect=yes], )
+if test "x$haveselect" = "xyes" ; then
+	EVSRCS="select.c"
+fi
+
+if test "x$ac_cv_header_sys_event_h" = "xyes"; then
+	AC_CHECK_FUNCS(kqueue, [havekqueue=yes], )
+	if test "x$havekqueue" = "xyes" ; then
+		EVSRCS="$EVSRCS kqueue.c"
+	fi
+fi
+
+AC_OUTPUT(Makefile)
